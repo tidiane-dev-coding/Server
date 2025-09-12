@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "Laawol Kafu API Mock",
+    "description": "Mock Postman pour tester l'API Laawol Kafu",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Créer un signalement",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"accident\",\n  \"description\": \"Accident à Kagbélen\",\n  \"latitude\": 9.6745,\n  \"longitude\": -13.5754\n}"
+        },
+        "url": {"raw": "http://localhost:5000/signalements", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["signalements"]}
+      }
+    },
+    {
+      "name": "Obtenir tous les signalements",
+      "request": {
+        "method": "GET",
+        "url": {"raw": "http://localhost:5000/signalements", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["signalements"]}
+      }
+    },
+    {
+      "name": "Obtenir un signalement spécifique",
+      "request": {
+        "method": "GET",
+        "url": {"raw": "http://localhost:5000/signalements/{{id}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["signalements", "{{id}}"]}
+      }
+    },
+    {
+      "name": "Supprimer un signalement",
+      "request": {
+        "method": "DELETE",
+        "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+        "url": {"raw": "http://localhost:5000/signalements/{{id}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["signalements", "{{id}}"]}
+      }
+    },
+    {
+      "name": "Créer un utilisateur",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nom\": \"Testeur\",\n  \"email\": \"testeur@example.com\",\n  \"motDePasse\": \"motdepasse123\"\n}"
+        },
+        "url": {"raw": "http://localhost:5000/utilisateurs", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["utilisateurs"]}
+      }
+    },
+    {
+      "name": "Connexion utilisateur",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testeur@example.com\",\n  \"motDePasse\": \"motdepasse123\"\n}"
+        },
+        "url": {"raw": "http://localhost:5000/utilisateurs/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["utilisateurs", "login"]}
+      }
+    },
+    {
+      "name": "Stats par quartier",
+      "request": {
+        "method": "GET",
+        "url": {"raw": "http://localhost:5000/signalements/stats/quartiers", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["signalements", "stats", "quartiers"]}
+      }
+    }
+  ]
+}
