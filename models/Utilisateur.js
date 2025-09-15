@@ -13,6 +13,8 @@ const UtilisateurSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   // Mot de passe (sera haché avant d'être enregistré)
   motDePasse: { type: String, required: true },
+  // Rôle de l'utilisateur (admin ou user)
+  role: { type: String, enum: ['admin', 'user'], default: 'user' },
 });
 
 
