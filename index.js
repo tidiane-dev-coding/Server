@@ -29,9 +29,23 @@ const app = express();
 
 
 // Active le middleware CORS pour accepter les requêtes externes
-// Autorise l'origine frontend (Vite par défaut sur 5173) et les cookies (credentials)
-const allowedOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:5173';
-app.use(cors({ origin: allowedOrigin, credentials: true }));
+// Autorise dynamiquement le frontend local et le domaine déployé
+const allowedOrigins = [
+  'https://laawolkafu.onrender.com',
+  'http://localhost:5173'
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    // Autorise les requêtes sans origin (ex: mobile, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 // Active le middleware body-parser pour lire le JSON envoyé par le client
 app.use(bodyParser.json());
 // Active le middleware cookie-parser pour parser les cookies
